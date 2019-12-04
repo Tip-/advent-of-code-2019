@@ -12,10 +12,19 @@ readInterface.on('line', function(mass) {
   masses.push(mass);
 });
 
+function getFuelForMass(mass) {
+  const result = Math.max(0, Math.floor(Number(mass) / 3) - 2);
+  if (result === 0) {
+    return result;
+  }
+
+  return result + getFuelForMass(result);
+}
+
 fd.on('end', function() {
   console.log(
     masses.reduce(function(acc, curr) {
-      return acc + Math.max(0, Math.floor(Number(curr) / 3) - 2);
+      return acc + getFuelForMass(curr);
     }, 0),
   );
 });
