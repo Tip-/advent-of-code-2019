@@ -14,13 +14,23 @@ const digitsNeverDecrease = input =>
     .sort((a, b) => a - b)
     .join('') === `${input}`;
 
-const hasTwoRepeatingDigits = input => {
-  const digits = `${input}`.split('');
-  return [...new Set(digits)].length < digits.length;
-};
+const hasExactlyTwoRepeatingDigits = input =>
+  Object.values(
+    `${input}`.split('').reduce(
+      (acc, curr) => ({
+        ...acc,
+        [curr]: Boolean(acc[curr]) ? acc[curr] + 1 : 1,
+      }),
+      {},
+    ),
+  ).indexOf(2) > -1;
 
 for (let i = MIN; i < MAX; i++) {
-  if (hasSixDigits(i) && digitsNeverDecrease(i) && hasTwoRepeatingDigits(i)) {
+  if (
+    hasSixDigits(i) &&
+    digitsNeverDecrease(i) &&
+    hasExactlyTwoRepeatingDigits(i)
+  ) {
     possibilitiesCount++;
     continue;
   }
