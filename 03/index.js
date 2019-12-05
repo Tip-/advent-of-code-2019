@@ -51,14 +51,13 @@ fs.readFile(__dirname + '/input', 'utf8', (err, data) => {
     )
     .map(getWireCrossedCoordinates);
 
-  const manhattanDistance = Math.min(
+  const minimumSignalDelay = Math.min(
     ...commonCoordinates(wireA, wireB)
       .filter(coordinates => coordinates !== '0;0')
-      .map(coordinates => {
-        const [x, y] = coordinates.split(';').map(Number);
-        return Math.abs(x) + Math.abs(y);
-      }),
+      .map(
+        coordinates => wireA.indexOf(coordinates) + wireB.indexOf(coordinates),
+      ),
   );
 
-  console.log(manhattanDistance);
+  console.log(minimumSignalDelay);
 });
