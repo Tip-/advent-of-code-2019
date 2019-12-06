@@ -18,14 +18,17 @@ const getIndirectOrbits = satellite => {
   return [orbited, ...getIndirectOrbits(orbited)];
 };
 
-const processIndirectOrbits = () => {
-  let count = 0;
+const process = () => {
+  const youOrbits = get('YOU');
+  const sanOrbits = getIndirectOrbits('SAN');
 
-  for (let [satellite] of directOrbits.entries()) {
-    count += getIndirectOrbits(satellite).length;
-  }
+  const firstCommonOrbit = youOrbits.filter(orbit =>
+    sanOrbits.includes(orbit),
+  )[0];
 
-  console.log(count);
+  console.log(
+    youOrbits.indexOf(firstCommonOrbit) + sanOrbits.indexOf(firstCommonOrbit),
+  );
 };
 
-fd.on('end', processIndirectOrbits);
+fd.on('end', process);
