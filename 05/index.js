@@ -1,43 +1,61 @@
 const fs = require('fs');
 const param = Number(process.argv[2]);
 
-const run = (_, data) => {
+const run = async (_, data) => {
   const intcode = data.split(',').map(Number);
   let cursor = 0;
 
   while (cursor < intcode.length) {
     const input = `${intcode[cursor]}`.padStart(5, '0');
-    const opcode = input.slice(-2);
+    const opcode = Number(input.slice(-2));
     const parameters = input
       .slice(0, 3)
       .split('')
       .reverse()
-      .map(Number);
-    let increment;
+      .map(Number)
+      .map(Boolean);
 
-    const one = parameters[0] === 0 ? intcode[cursor + 1] : cursor + 1;
-    const two = parameters[1] === 0 ? intcode[cursor + 2] : cursor + 2;
-    const three = parameters[2] === 0 ? intcode[cursor + 3] : cursor + 3;
+    const one = parameters[0] ? cursor + 1 : intcode[cursor + 1];
+    const two = parameters[1] ? cursor + 2 : intcode[cursor + 2];
+    const three = parameters[2] ? cursor + 3 : intcode[cursor + 3];
 
     switch (Number(opcode)) {
       case 1:
-        increment = 4;
-        intcode[three] = intcode[one] + intcode[two];
+        intcode[intcode[cursor + 3]] = intcode[one] + intcode[two];
+        cursor = cursor + 4;
         break;
 
       case 2:
-        increment = 4;
-        intcode[three] = intcode[one] * intcode[two];
+        intcode[intcode[cursor + 3]] = intcode[one] * intcode[two];
+        cursor = cursor + 4;
         break;
 
       case 3:
-        increment = 2;
         intcode[one] = param;
+        cursor = cursor + 2;
         break;
 
       case 4:
         console.log(intcode[one]);
-        increment = 2;
+        cursor = cursor + 2;
+        break;
+
+      case 5:
+        cursor = Boolean(intcode[one]) ? intcode[two] : cursor + 3;
+        break;
+
+      case 6:
+        cursor = !Boolean(intcode[one]) ? intcode[two] : cursor + 3;
+        break;
+
+      case 7:
+        intcode[three] = intcode[one] < intcode[two] ? 1 : 0;
+        cursor = cursor + 4;
+        break;
+
+      case 8:
+        intcode[three] = intcode[one] === intcode[two] ? 1 : 0;
+        cursor = cursor + 4;
         break;
 
       case 99:
@@ -46,8 +64,6 @@ const run = (_, data) => {
       default:
         break;
     }
-
-    cursor = cursor + increment;
   }
 
   return intcode;
