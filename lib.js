@@ -26,7 +26,7 @@ const intcodeComputer = ({ data, param, param2, mode }) => {
         break;
       case 3:
         intcode[one] = param;
-        param = param2;
+        param = Boolean(param2) ? param2 : param;
         cursor = cursor + 2;
         break;
       case 4:
