@@ -8,7 +8,7 @@
 [![Day 04](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](https://github.com/Tip-/advent-of-code-2019/tree/master/04)
 [![Day 05](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](https://github.com/Tip-/advent-of-code-2019/tree/master/05)
 [![Day 06](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](https://github.com/Tip-/advent-of-code-2019/tree/master/06)
-[![Day 07](https://badgen.net/badge/07/%E2%98%86%E2%98%86/grey)](https://github.com/Tip-/advent-of-code-2019/tree/master/07)
+[![Day 07](https://badgen.net/badge/07/%E2%98%85%E2%98%86/grey)](https://github.com/Tip-/advent-of-code-2019/tree/master/07)
 ![Day 08](https://badgen.net/badge/08/%E2%98%86%E2%98%86/grey)
 ![Day 09](https://badgen.net/badge/09/%E2%98%86%E2%98%86/grey)
 ![Day 10](https://badgen.net/badge/10/%E2%98%86%E2%98%86/grey)

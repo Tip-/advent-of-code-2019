@@ -1,4 +1,4 @@
-const intcodeComputer = ({ data, param, mode }) => {
+const intcodeComputer = ({ data, param, param2, mode }) => {
   const intcode = data.split(',').map(Number);
   let cursor = 0;
   let output;
@@ -14,6 +14,7 @@ const intcodeComputer = ({ data, param, mode }) => {
     const one = parameters[0] ? cursor + 1 : intcode[cursor + 1];
     const two = parameters[1] ? cursor + 2 : intcode[cursor + 2];
     const three = parameters[2] ? cursor + 3 : intcode[cursor + 3];
+
     switch (Number(opcode)) {
       case 1:
         intcode[intcode[cursor + 3]] = intcode[one] + intcode[two];
@@ -25,6 +26,7 @@ const intcodeComputer = ({ data, param, mode }) => {
         break;
       case 3:
         intcode[one] = param;
+        param = param2;
         cursor = cursor + 2;
         break;
       case 4:
