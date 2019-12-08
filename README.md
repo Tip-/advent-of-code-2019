@@ -1,4 +1,6 @@
-# Advent of code 2019
+# 🎄Advent of code 2019
+
+[![badge](https://action-badges.now.sh/Tip-/advent-of-code-2019)](https://github.com/Tip-/advent-of-code-2019/actions)
 
 ## Completion
 
@@ -26,7 +28,3 @@
 ![Day 22](https://badgen.net/badge/22/%E2%98%86%E2%98%86/grey)
 ![Day 23](https://badgen.net/badge/23/%E2%98%86%E2%98%86/grey)
 ![Day 24](https://badgen.net/badge/24/%E2%98%86%E2%98%86/grey)
-
-
-
-
