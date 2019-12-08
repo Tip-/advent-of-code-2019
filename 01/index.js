@@ -15,5 +15,3 @@ const run = () => {
 };
 
 fd.on('end', run);
-
-module.exports = { run };

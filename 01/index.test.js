@@ -8,6 +8,6 @@ test('At first, a module of mass 1969 requires 654 fuel', () => {
   expect(getAgnosticFuelForMass(1969)).toBe(654);
 });
 
-test('The total fuel required for a module of mass 1969', () => {
+test('The total fuel required for a module of mass 1969 is 966', () => {
   expect(getFuelForMass(1969)).toBe(966);
 });
