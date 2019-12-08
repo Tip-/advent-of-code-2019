@@ -2,6 +2,7 @@ const readline = require('readline');
 const fs = require('fs');
 const fd = fs.createReadStream(__dirname + '/input');
 const readInterface = readline.createInterface({ input: fd });
+const { getFuelForMasses } = require('./utils');
 
 let masses = [];
 
@@ -9,21 +10,10 @@ readInterface.on('line', function(mass) {
   masses.push(mass);
 });
 
-const getFuelForMass = mass => {
-  const result = Math.max(0, Math.floor(Number(mass) / 3) - 2);
-  if (result === 0) {
-    return result;
-  }
-
-  return result + getFuelForMass(result);
-};
-
 const run = () => {
-  console.log(
-    masses.reduce(function(acc, curr) {
-      return acc + getFuelForMass(curr);
-    }, 0),
-  );
+  console.log(getFuelForMasses(masses));
 };
 
 fd.on('end', run);
+
+module.exports = { run };
