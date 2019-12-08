@@ -2,12 +2,9 @@ const fs = require('fs');
 const WIDTH = 25;
 const HEIGHT = 6;
 
-const split = arr =>
-  arr.length > WIDTH * HEIGHT
-    ? [
-        arr.slice(0, WIDTH * HEIGHT),
-        ...split(arr.slice(WIDTH * HEIGHT), WIDTH * HEIGHT),
-      ]
+const split = (arr, length) =>
+  arr.length > length
+    ? [arr.slice(0, length), ...split(arr.slice(length), length)]
     : [arr];
 
 const run = (_, data) => {
@@ -16,24 +13,22 @@ const run = (_, data) => {
       .split('')
       .filter(n => n !== '\n')
       .map(Number),
+    WIDTH * HEIGHT,
   );
 
-  const { layer } = layers.reduce(
-    ({ zerosCounts, layer }, curr) => {
-      const currentLayerZerosCount = curr.filter(digit => !Boolean(digit))
-        .length;
-      if (currentLayerZerosCount < zerosCounts) {
-        return { zerosCounts: currentLayerZerosCount, layer: curr };
-      }
+  let positions = [];
 
-      return { zerosCounts, layer };
-    },
-    { zerosCounts: WIDTH * HEIGHT + 1, layer: [] },
-  );
+  for (let cursor = 0; cursor < WIDTH * HEIGHT; cursor++) {
+    let layer = 0;
+    while (layers[layer][cursor] === 2) {
+      layer++;
+    }
 
-  console.log(
-    layer.filter(digit => digit === 1).length *
-      layer.filter(digit => digit === 2).length,
+    positions.push(layers[layer][cursor]);
+  }
+
+  split(positions, WIDTH).map(line =>
+    console.log(line.map(digit => (Boolean(digit) ? '•' : ' ')).join('')),
   );
 };
 
