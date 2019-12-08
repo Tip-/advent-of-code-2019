@@ -75,7 +75,13 @@ const getPermutations = input => {
   return output.map(chunk => [].concat(...chunk));
 };
 
+const split = (input, length) =>
+  input.length > length
+    ? [input.slice(0, length), ...split(input.slice(length), length)]
+    : [input];
+
 module.exports = {
   intcodeComputer,
   getPermutations,
+  split,
 };

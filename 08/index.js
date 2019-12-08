@@ -1,11 +1,7 @@
 const fs = require('fs');
+const { split } = require('../lib');
 const WIDTH = 25;
 const HEIGHT = 6;
-
-const split = (arr, length) =>
-  arr.length > length
-    ? [arr.slice(0, length), ...split(arr.slice(length), length)]
-    : [arr];
 
 const run = (_, data) => {
   const layers = split(
